@@ -13,9 +13,9 @@ pre_start_action() {
       echo "Initializing PostgreSQL at $DATA_DIR"
 
       # Copy the data that we generated within the container to the empty DATA_DIR.
-      cp -R /var/lib/pgsql/9.4/data/* $DATA_DIR
-      #mv /var/lib/pgsql/9.4/data /var/lib/pgsql/9.4/data.old
-      #ln -s $DATA_DIR /var/lib/pgsql/9.4
+      cp -R /var/lib/pgsql/9.3/data/* $DATA_DIR
+      #mv /var/lib/pgsql/9.3/data /var/lib/pgsql/9.3/data.old
+      #ln -s $DATA_DIR /var/lib/pgsql/9.3
   fi
 
   # Ensure postgres owns the DATA_DIR

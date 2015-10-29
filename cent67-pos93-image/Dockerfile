@@ -8,23 +8,23 @@ RUN localedef -i en_US -c -f UTF-8 en_US.UTF-8
 # Install EPEL6 for additional packages
 RUN rpm -Uvh http://mirror.pnl.gov/epel/6/i386/epel-release-6-8.noarch.rpm
 
-# Now install postgreSQL 9.4
-RUN rpm -Uvh http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-2.noarch.rpm
+# Now install postgreSQL 9.3
+RUN rpm -Uvh http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-1.noarch.rpm
 
 # Install postgre app
-RUN yum install -y postgresql94 postgresql94-server postgresql94-contrib
+RUN yum install -y postgresql93 postgresql93-server postgresql93-contrib
 
 # Install other tools.
 RUN yum install -y inotify-tools vi which
 
 # initialize DB data files
-RUN su - postgres -c /usr/pgsql-9.4/bin/initdb
+RUN /etc/init.d/postgresql-9.3 initdb
 
 # Cofigure the database to use our data dir.
 
 ## all for all
-RUN echo "host    all             all             0.0.0.0/0            trust" >> /var/lib/pgsql/9.4/data/pg_hba.conf
-RUN echo "listen_addresses='*'" >> /var/lib/pgsql/9.4/data/postgresql.conf
+RUN echo "host    all             all             0.0.0.0/0            trust" >> /var/lib/pgsql/9.3/data/pg_hba.conf
+RUN echo "listen_addresses='*'" >> /var/lib/pgsql/9.3/data/postgresql.conf
 
 # now prepare sshd and supervisor
 RUN yum install -y openssh-server supervisor
